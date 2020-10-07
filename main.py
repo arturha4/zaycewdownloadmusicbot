@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-url="http://zaycev.net/search.html?query_search=30+seconds+to+mars"
+url="http://zaycev.net/search.html?query_search=клава+кока+краш"
 #url нужно сделать так чтобы считывал с телеги последнюю часть, сплитил и вставлял в url
 url_music_download=[]
 data_urls=[]
@@ -8,7 +8,7 @@ def get_html(url):
    page=requests.get(url)
    return page
 
-def parse():
+def parse(url):
    html=get_html(url)
    if html.status_code==200:
       get_content(html.text)
@@ -20,17 +20,15 @@ def get_content(html):
    for download_link in items:
       data_urls.append(boss+download_link.get('data-url'))
 urls=[]
-def parse_data_urls():
+def parse_data_music():
    for link in data_urls:
-      print(get_html(link).text)
+      print(parse_end_urls(get_html(link).text))
+      break
+def  parse_end_urls(link):
+   return link[link.find('https'):link.find('"}')]
 
-
-
-
-
-
-parse()
-parse_data_urls()
+parse(url)
+parse_data_music()
 
 
 
