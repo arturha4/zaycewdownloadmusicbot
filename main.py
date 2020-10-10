@@ -35,8 +35,6 @@ def get_content(html):
     items = soup.find_all('div', class_="musicset-track clearfix")
     for download_link in items:
         data_urls.append(boss + download_link.get('data-url'))
-
-
 urls = []
 
 
